@@ -9,51 +9,49 @@ import {
   AppRegistry,
   TouchableHighlight,
   ScrollView,
+  StatusBar,
+  TextInput
 } from 'react-native';
 
 
 export default class LoginComponent extends Component {
+  constructor(props){
+    super(props);
+    this.state = {email: '', password: ''};
+  }
   press(){
     Alert.alert('You tapped the button!');
   }
+  handleEmail(email){
+    this.setState({ email: email})
+  };
+  handlePass(password){
+    this.setState({ password: password})
+  };
   render() {
+   
     return (
       <View style={styles.container}>
           <Text style={styles.v1}>Login</Text>
-          <View style={styles.btnContainer}>
-            <Button onPress={() => {this.press()}}
-            title='TouchableNativeFeedback'/>
-          </View>
-          <View style={styles.btnContainer}>
-          <FlatList
-            data={[
-              {key: 'Devin'},
-              {key: 'Jackson'},
-              {key: 'James'},
-              {key: 'Joel'},
-              {key: 'John'},
-              {key: 'Jillian'},
-              {key: 'Jimmy'},
-              {key: 'Julie'},
-              {key: 'Devin'},
-              {key: 'Jackson'},
-              {key: 'James'},
-              {key: 'Joel'},
-              {key: 'John'},
-              {key: 'Jillian'},
-              {key: 'Jimmy'},
-              {key: 'Julie'},
-              {key: 'Devin'},
-              {key: 'Jackson'},
-              {key: 'James'},
-              {key: 'Joel'},
-              {key: 'John'},
-              {key: 'Jillian'},
-              {key: 'Jimmy'},
-              {key: 'Julie'},
-            ]}
-            renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
-          />
+          <View style={styles.loginBody}>
+            <View style={{padding: 10}}>
+              <TextInput
+                style={{height: 60}}
+                autoCapitalize = "none"
+                placeholder="Enter email!"
+                onChangeText={(email) => this.handleEmail(email)}
+              />
+              <TextInput
+                style={{height: 60}}
+                autoCapitalize = "none"
+                placeholder="Enter password"
+                onChangeText={(password) => this.handlePass(password)}
+              />
+            </View>
+            <View style={{padding: 10}}>
+              <Button onPress={() => {this.press()}}
+              title='Login'/>
+            </View>
           </View>
       </View>
     );
@@ -70,10 +68,10 @@ const styles= StyleSheet.create({
     backgroundColor:'#2741ff',
     color: '#ffffff'
   },
-  item: {
+  loginBody: {
     padding: 10,
-    fontSize: 18,
-    height: 44,
+    flex:1,
+    justifyContent: 'center',
   },
 })
 AppRegistry.registerComponent('nativeApp', () => LoginComponent);
